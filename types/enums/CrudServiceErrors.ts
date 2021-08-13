@@ -1,4 +1,4 @@
-export enum SubscriptionServiceErrors {
+export enum CrudServiceErrors {
   validationError,
   RowNotFound,
   tableAlreadyExists,

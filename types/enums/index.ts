@@ -1,1 +1,1 @@
-export * from './SubscriptionServiceErrors.enum';
+export * from './CrudServiceErrors.enum';

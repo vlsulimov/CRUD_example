@@ -1,6 +1,6 @@
-import { IRole, PostRoleParams, SubscriptionServiceErrors } from '../../../types';
+import { IRole, PostRoleParams, CrudServiceErrors } from '../../../types';
 import { NotFoundResponseError } from '../../../utilsGlobal';
-import { subscriptionServiceErrorObjects } from '../../utils';
+import { CrudServiceErrorObjects } from '../../utils';
 import { RoleRepository } from '../repository';
 
 export async function findAllRoles() {
@@ -20,7 +20,7 @@ export async function findOneRoleById(id) {
 
   if (!role) {
     throw new NotFoundResponseError(
-      subscriptionServiceErrorObjects[SubscriptionServiceErrors.RowNotFound]
+      CrudServiceErrorObjects[CrudServiceErrors.RowNotFound]
     );
   }
   const resultRole: IRole = {
@@ -48,7 +48,7 @@ export async function deleteOneRoleById(id: number) {
 
   if (!role) {
     throw new NotFoundResponseError(
-      subscriptionServiceErrorObjects[SubscriptionServiceErrors.RowNotFound]
+      CrudServiceErrorObjects[CrudServiceErrors.RowNotFound]
     );
   }
 

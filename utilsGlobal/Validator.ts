@@ -2,8 +2,8 @@ import fastestValidator from 'fastest-validator';
 import express from 'express';
 
 import { ValidationResponseError } from './ResponseFactory';
-import { subscriptionServiceErrorObjects } from '../src/utils';
-import { SubscriptionServiceErrors } from '../types';
+import { CrudServiceErrorObjects } from '../src/utils';
+import { CrudServiceErrors } from '../types';
 
 export class Validator {
   static getExpressValidator(schema) {
@@ -19,7 +19,7 @@ export class Validator {
         return next();
       } else {
         const errorObject =
-          subscriptionServiceErrorObjects[SubscriptionServiceErrors.validationError];
+          CrudServiceErrorObjects[CrudServiceErrors.validationError];
         return next(
           new ValidationResponseError({
             code: errorObject.code,

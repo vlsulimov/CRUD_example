@@ -3,10 +3,10 @@ import {
   IUserFull,
   PostRoleToUserParams,
   PostUserParams,
-  SubscriptionServiceErrors,
+  CrudServiceErrors,
 } from '../../../types';
 import { NotFoundResponseError } from '../../../utilsGlobal';
-import { subscriptionServiceErrorObjects } from '../../utils';
+import { CrudServiceErrorObjects } from '../../utils';
 
 import { RoleRepository, UserRepository, UserRoleRepository } from '../repository';
 
@@ -28,7 +28,7 @@ export async function findOneUserById(id) {
 
   if (!user) {
     throw new NotFoundResponseError(
-      subscriptionServiceErrorObjects[SubscriptionServiceErrors.RowNotFound]
+      CrudServiceErrorObjects[CrudServiceErrors.RowNotFound]
     );
   }
   const resultUser: IUser = {
@@ -46,7 +46,7 @@ export async function findOneUserWithRolesById(id) {
 
   if (!user) {
     throw new NotFoundResponseError(
-      subscriptionServiceErrorObjects[SubscriptionServiceErrors.RowNotFound]
+      CrudServiceErrorObjects[CrudServiceErrors.RowNotFound]
     );
   }
   const resultUser: IUserFull = {
@@ -77,7 +77,7 @@ export async function deleteOneUserById(id: number) {
 
   if (!user) {
     throw new NotFoundResponseError(
-      subscriptionServiceErrorObjects[SubscriptionServiceErrors.RowNotFound]
+      CrudServiceErrorObjects[CrudServiceErrors.RowNotFound]
     );
   }
 
@@ -90,7 +90,7 @@ export async function addRoleToUser(params: PostRoleToUserParams) {
 
   if (!user || !role) {
     throw new NotFoundResponseError(
-      subscriptionServiceErrorObjects[SubscriptionServiceErrors.RowNotFound]
+      CrudServiceErrorObjects[CrudServiceErrors.RowNotFound]
     );
   }
   await UserRoleRepository.createOne(params);
