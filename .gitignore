@@ -1,0 +1,15 @@
+# Node files
+node_modules
+build
+
+# Environment variable
+*.env
+
+# IDE files
+.vscode
+
+# Mac system files
+.DS_Store
+
+# Eslint cache
+.eslintcache
