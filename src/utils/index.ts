@@ -1,1 +1,1 @@
-export * from './subscriptionServiceErrorObjects';
+export * from './CrudServiceErrorObjects';
