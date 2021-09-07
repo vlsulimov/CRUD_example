@@ -27,7 +27,5 @@
   ],
   "include": [
     "./src/**/*",
-    "./types/**/*",
-    "moleculer.config.ts"
-, "utilsGlobal/logger.ts"  ]
+    "./types/**/*"  ]
 }
