@@ -1,12 +1,12 @@
 import express from 'express';
 
 import { IUser } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../lib';
+import { IAction, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { findAllUsers } from '../../methods/user.methods';
 
-export const getUsers: IActionSchema = {
+export const getUsers: IAction = {
   route: '/user',
   method: 'GET',
   controller: async (

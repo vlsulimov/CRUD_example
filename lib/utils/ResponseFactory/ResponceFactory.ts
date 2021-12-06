@@ -6,7 +6,10 @@ export class ResponseFactory {
 
     return new ServiceErrorResponse(message, err.code, err.body, err.body?.length ?? null);
   }
-  public static createServiceSuccessResponse(data?: any, count?: number) {
-    return new ServiceSuccessResponse(data, count ?? data?.length);
+  public static createServiceSuccessResponse<T = any>(data?: T, count?: number) {
+    return new ServiceSuccessResponse(
+      data,
+      count ?? (data && Array.isArray(data) ? data.length : undefined)
+    );
   }
 }

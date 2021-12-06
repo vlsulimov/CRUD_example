@@ -2,12 +2,12 @@ import express from 'express';
 import { getSchema } from 'fastest-validator-decorators';
 
 import { IRole, PostRoleParams } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../lib';
+import { IAction, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { createRole } from '../../methods/role.methods';
 
-export const postRole: IActionSchema = {
+export const postRole: IAction = {
   route: '/role',
   method: 'POST',
   validate: getSchema(PostRoleParams),

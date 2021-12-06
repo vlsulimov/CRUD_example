@@ -2,12 +2,12 @@ import express from 'express';
 import { getSchema } from 'fastest-validator-decorators';
 
 import { IUserFull, PostRoleToUserParams } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../lib';
+import { IAction, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { addRoleToUser } from '../../methods/user.methods';
 
-export const postRoleToUser: IActionSchema = {
+export const postRoleToUser: IAction = {
   route: '/role-to-user',
   method: 'POST',
   validate: getSchema(PostRoleToUserParams),

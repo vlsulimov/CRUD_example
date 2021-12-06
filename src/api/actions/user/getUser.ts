@@ -2,12 +2,12 @@ import express from 'express';
 import { getSchema } from 'fastest-validator-decorators';
 
 import { IUser, GetUserParams } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../lib';
+import { IAction, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { findOneUserById } from '../../methods/user.methods';
 
-export const getUser: IActionSchema = {
+export const getUser: IAction = {
   route: '/user/:id',
   method: 'GET',
   validate: getSchema(GetUserParams),

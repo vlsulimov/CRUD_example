@@ -7,4 +7,3 @@ export class ValidationResponseError extends BaseResponseError {
     super(error.message, 400, error.code, data);
   }
 }
-

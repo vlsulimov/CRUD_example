@@ -1,7 +1,9 @@
 import { Schema, String } from 'fastest-validator-decorators';
 
+import { Parameters } from '../../lib';
+
 @Schema()
-export class PostUserParams {
+export class PostUserParams extends Parameters {
   @String({ optional: false })
   firstName!: string;
 

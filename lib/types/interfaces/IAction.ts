@@ -2,7 +2,7 @@ import express from 'express';
 
 import { IServiceResponse } from '.';
 
-export interface IActionSchema {
+export interface IAction {
   route: string;
   method: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
   validate?: any;

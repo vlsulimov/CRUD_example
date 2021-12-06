@@ -2,12 +2,12 @@ import express from 'express';
 import { getSchema } from 'fastest-validator-decorators';
 
 import { IUser, PostUserParams } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../lib';
+import { IAction, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { createUser } from '../../methods/user.methods';
 
-export const postUser: IActionSchema = {
+export const postUser: IAction = {
   route: '/user',
   method: 'POST',
   validate: getSchema(PostUserParams),
