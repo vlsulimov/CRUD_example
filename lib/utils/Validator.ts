@@ -1,18 +1,17 @@
 import fastestValidator, { ValidationSchema } from 'fastest-validator';
 import express from 'express';
 
-import { ValidationResponseError } from './ResponseFactory';
-import { CrudServiceErrorObjects } from '../../src/utils';
-import { CrudServiceErrors } from '../../types';
+import { ValidationResponseError, GlobalErrors, GlobalErrorObjects } from '..';
 
 export class Validator {
   static getExpressValidator(schema: ValidationSchema) {
     return async (req: express.Request, _res: express.Response, next: express.NextFunction) => {
+      const fullObject = { ...req.body, ...req.query, ...req.params };
+
       if (!schema) {
         return next();
       }
 
-      const fullObject = { ...req.body, ...req.query, ...req.params };
       const check = new fastestValidator().compile(schema);
       const result = check(fullObject);
 
@@ -20,13 +19,9 @@ export class Validator {
         req.params = fullObject;
         return next();
       }
-      const errorObject = CrudServiceErrorObjects[CrudServiceErrors.validationError];
 
       return next(
-        new ValidationResponseError({
-          code: errorObject.code,
-          message: `${errorObject.message}: ${JSON.stringify(result)}`,
-        })
+        new ValidationResponseError(GlobalErrorObjects[GlobalErrors.validationError], result)
       );
     };
   }

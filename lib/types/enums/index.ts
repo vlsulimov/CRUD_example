@@ -1,1 +1,2 @@
-export * from './LogLevel';
+export * from './LogLevel.enum';
+export * from './GlobalErrors.enum';
