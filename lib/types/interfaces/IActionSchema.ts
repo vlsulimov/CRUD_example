@@ -1,5 +1,6 @@
 import express from 'express';
-import { IServiceResponse } from '../../typesGlobal';
+
+import { IServiceResponse } from '.';
 
 export interface IActionSchema {
   route: string;

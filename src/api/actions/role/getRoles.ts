@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { IRole } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../typesGlobal';
+import { IActionSchema, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { findAllRoles } from '../../methods/role.methods';

@@ -2,7 +2,7 @@ import express from 'express';
 import { getSchema } from 'fastest-validator-decorators';
 
 import { IRole, GetRoleParams } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../typesGlobal';
+import { IActionSchema, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { findOneRoleById } from '../../methods/role.methods';

@@ -1,6 +1,4 @@
-import { BaseResponseError } from './ResponseErrors/BaseResponseError';
-import { ServiceErrorResponse } from './ServiceErrorResponse';
-import { ServiceSuccessResponse } from './ServiceSuccessResponse';
+import { ServiceErrorResponse, ServiceSuccessResponse, BaseResponseError } from '.';
 
 export class ResponseFactory {
   public static createServiceErrorResponse(err: BaseResponseError) {

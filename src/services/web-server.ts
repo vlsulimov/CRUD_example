@@ -1,11 +1,10 @@
 import http from 'http';
 import express from 'express';
-import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
-import { log, ErrorLog } from '../../utilsGlobal/logger';
+import { log } from '../../utilsGlobal/logger';
 import { BaseResponseError, ResponseFactory } from '../../utilsGlobal';
-import { IWebServerConfig } from '../../typesGlobal';
+import { IWebServerConfig } from '../../lib';
 import router from '../api/router';
 
 const webServerConfig: IWebServerConfig = {
@@ -23,17 +22,16 @@ class WebServer {
 
   public initialize(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.app.use(bodyParser.json());
+      this.app.use(express.json());
       this.app.use(
-        bodyParser.urlencoded({
+        express.urlencoded({
           extended: true,
         })
       );
       this.app.use(helmet());
-      this.app.use(log);
+      this.app.use((req: express.Request, _res: express.Response) => log.routes(req.statusCode));
 
       this.app.use('/api', router);
-      this.app.use(ErrorLog);
 
       this.app.use(
         (
@@ -64,7 +62,7 @@ class WebServer {
     });
   }
 
-  public getHttpServer(){
+  public getHttpServer() {
     return this.httpServer;
   }
 }

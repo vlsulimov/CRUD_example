@@ -1,4 +1,4 @@
-import { IServiceResponse } from '../../typesGlobal';
+import { IServiceResponse } from '../..';
 
 export class BaseResponse implements IServiceResponse<any> {
   public message: string;

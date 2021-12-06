@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { IUser } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../typesGlobal';
+import { IActionSchema, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { findAllUsers } from '../../methods/user.methods';

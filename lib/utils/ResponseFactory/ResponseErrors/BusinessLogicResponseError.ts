@@ -1,5 +1,5 @@
 import { BaseResponseError } from './BaseResponseError';
-import { IServiceErrorObject } from '../../../typesGlobal';
+import { IServiceErrorObject } from '../../..';
 
 export class BusinessLogicResponseError extends BaseResponseError {
   public constructor(error: IServiceErrorObject) {

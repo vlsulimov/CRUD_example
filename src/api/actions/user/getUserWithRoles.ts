@@ -2,7 +2,7 @@ import express from 'express';
 import { getSchema } from 'fastest-validator-decorators';
 
 import { IUserFull, GetUserParams } from '../../../../types';
-import { IActionSchema, IServiceResponse } from '../../../../typesGlobal';
+import { IActionSchema, IServiceResponse } from '../../../../lib';
 import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
 import { findOneUserWithRolesById } from '../../methods/user.methods';

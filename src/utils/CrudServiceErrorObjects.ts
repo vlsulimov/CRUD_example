@@ -1,5 +1,5 @@
 import { CrudServiceErrors } from '../../types';
-import { IServiceErrorObject } from '../../typesGlobal';
+import { IServiceErrorObject } from '../../lib';
 
 export const CrudServiceErrorObjects: Record<
   CrudServiceErrors,
