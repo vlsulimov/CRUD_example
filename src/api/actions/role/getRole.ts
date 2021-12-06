@@ -1,31 +1,14 @@
 import express from 'express';
-import { getSchema } from 'fastest-validator-decorators';
 
-import { IRole, GetRoleParams } from '../../../../types';
-import { IAction, IServiceResponse } from '../../../../lib';
-import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
+import { IAction, IdParam } from '../../../../lib';
 
-import { findOneRoleById } from '../../methods/role.methods';
+import { IRole } from '../../../../types';
 
-export const getRole: IAction = {
+import { findOneRoleById } from '../../methods/role';
+
+export const getRole: IAction<IRole> = {
   route: '/role/:id',
   method: 'GET',
-  validate: getSchema(GetRoleParams),
-  controller: async (
-    req: express.Request<GetRoleParams>,
-    res: express.Response<IServiceResponse<IRole>>,
-    next: express.NextFunction
-  ) => {
-    try {
-      const { id } = req.params;
-      const role = await findOneRoleById(id);
-
-      res.json(ResponseFactory.createServiceSuccessResponse(role));
-    } catch (err) {
-      if (err instanceof BaseResponseError) {
-        next(err);
-      }
-      next(new BaseResponseError(err.message));
-    }
-  },
+  validate: IdParam.schema,
+  controller: (req: express.Request<IdParam>) => findOneRoleById(req.params.id),
 };

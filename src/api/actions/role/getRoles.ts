@@ -1,28 +1,11 @@
-import express from 'express';
-
 import { IRole } from '../../../../types';
-import { IAction, IServiceResponse } from '../../../../lib';
-import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
 
-import { findAllRoles } from '../../methods/role.methods';
+import { IAction } from '../../../../lib';
 
-export const getRoles: IAction = {
+import { findAllRoles } from '../../methods/role';
+
+export const getRoles: IAction<IRole[]> = {
   route: '/role',
   method: 'GET',
-  controller: async (
-    _req: express.Request,
-    res: express.Response<IServiceResponse<IRole[]>>,
-    next: express.NextFunction
-  ) => {
-    try {
-      const roles = await findAllRoles();
-
-      res.json(ResponseFactory.createServiceSuccessResponse(roles));
-    } catch (err) {
-      if (err instanceof BaseResponseError) {
-        next(err);
-      }
-      next(new BaseResponseError(err.message));
-    }
-  },
+  controller: () => findAllRoles(),
 };

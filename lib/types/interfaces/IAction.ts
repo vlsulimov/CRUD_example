@@ -1,14 +1,8 @@
 import express from 'express';
 
-import { IServiceResponse } from '.';
-
-export interface IAction {
+export interface IAction<T = any> {
   route: string;
   method: 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
   validate?: any;
-  controller(
-    req: express.Request<any>,
-    res: express.Response<IServiceResponse<any>>,
-    next: express.NextFunction
-  );
+  controller(req: express.Request<any>): T | Promise<T>;
 }

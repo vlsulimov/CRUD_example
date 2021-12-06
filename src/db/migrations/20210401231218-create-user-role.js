@@ -11,9 +11,17 @@ module.exports = {
       },
       userId: {
         type: Sequelize.BIGINT,
+        references: {
+            model: 'user',
+            key: 'id',
+        },
       },
       roleId: {
         type: Sequelize.BIGINT,
+        references: {
+            model: 'role',
+            key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,

@@ -1,7 +1,7 @@
 export class BaseResponseError extends Error {
   public statusCode: number;
   public code: number;
-  public data: unknown | null;
+  public data: any | null;
 
   public constructor(message: string, statusCode?: number, code?: number, data?: any) {
     super(message);

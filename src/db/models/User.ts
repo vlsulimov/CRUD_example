@@ -2,14 +2,14 @@ import {
   Model,
   Table,
   Column,
-  BelongsToMany,
+  HasMany,
   PrimaryKey,
   AutoIncrement,
   DataType,
   AllowNull,
 } from 'sequelize-typescript';
 
-import { UserRole, Role } from '.';
+import { UserRole } from '.';
 
 @Table({
   timestamps: true,
@@ -41,8 +41,6 @@ export class User extends Model<User> {
   @Column(DataType.DATE)
   updatedAt!: Date | null;
 
-  // @HasMany(() => UserRole)
-  // userRoles!: UserRole[];
-  @BelongsToMany(() => Role, () => UserRole)
-  roles!: Role[];
+  @HasMany(() => UserRole)
+  userRoles!: UserRole[];
 }

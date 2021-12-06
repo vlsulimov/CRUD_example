@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 
+import { log } from '../lib';
+
 import sequelize from './db/connection';
 import { webServer } from './services/web-server';
 
@@ -9,23 +11,29 @@ async function startup() {
     await sequelize.sync();
 
     await webServer.initialize();
-    console.log('started');
-  } catch (err) {
-    console.log(err);
+
+    log.debug('Service started');
+  } catch (err: any) {
+    log.error(err);
     process.exit(1);
   }
 }
-async function shutdown(e?: Error) {
+async function shutdown(e?) {
   let err = e;
 
   try {
     await webServer.close();
     await sequelize.close();
-  } catch (e1) {
+  } catch (e1: any) {
     err = err || e1;
   }
 
-  return err ? process.exit(1) : process.exit(0);
+  if (err) {
+    log.error(err);
+    return process.exit(1);
+  }
+
+  return process.exit(0);
 }
 
 process.on('SIGTERM', () => {

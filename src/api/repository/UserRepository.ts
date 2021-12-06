@@ -1,5 +1,5 @@
 import { User } from '../../db/models/User';
-import { Role } from '../../db/models';
+import { Role, UserRole } from '../../db/models';
 
 interface ICreateUserPayload {
   firstName: string;
@@ -12,15 +12,14 @@ export class UserRepository {
     return User.findAll({ order: [['id', 'ASC']] });
   }
 
-  public static findAllById(id: number[] | number): Promise<User[]> {
-    return User.findAll({ where: { id }, order: [['id', 'ASC']] });
+  public static findOneById(id: number[] | number): Promise<User> {
+    return User.findOne({ where: { id } });
   }
 
-  public static findAllWithRolesById(id: number[] | number): Promise<User[]> {
-    return User.findAll({
+  public static async findOneWithRolesById(id: number): Promise<User> {
+    return User.findOne({
       where: { id },
-      include: [Role],
-      order: [['id', 'ASC']],
+      include: [{ model: UserRole, include: [Role] }],
     });
   }
 

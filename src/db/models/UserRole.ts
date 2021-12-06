@@ -6,8 +6,8 @@ import {
   PrimaryKey,
   AutoIncrement,
   DataType,
-  // BelongsTo,
   AllowNull,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { User, Role } from '.';
 
@@ -39,9 +39,9 @@ export class UserRole extends Model<UserRole> {
   @Column(DataType.DATE)
   updatedAt!: Date;
 
-  // @BelongsTo(() => User)
-  // user!: User;
+  @BelongsTo(() => User)
+  user!: User;
 
-  // @BelongsTo(() => Role)
-  // role!: Role;
+  @BelongsTo(() => Role)
+  role!: Role;
 }

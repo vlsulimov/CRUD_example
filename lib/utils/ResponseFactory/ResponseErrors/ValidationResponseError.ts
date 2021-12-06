@@ -1,6 +1,7 @@
 import { ValidationError } from 'fastest-validator';
 
-import { IServiceErrorObject, BaseResponseError } from '../../..';
+import {BaseResponseError} from '.';
+import { IServiceErrorObject } from '../../..';
 
 export class ValidationResponseError extends BaseResponseError {
   public constructor(error: IServiceErrorObject, data?: ValidationError[] | unknown) {

@@ -10,8 +10,8 @@ export class RoleRepository {
     return Role.findAll({ order: [['id', 'ASC']] });
   }
 
-  public static findAllById(id: number[] | number): Promise<Role[]> {
-    return Role.findAll({ where: { id }, order: [['id', 'ASC']] });
+  public static findOneById(id: number): Promise<Role> {
+    return Role.findOne({ where: { id } });
   }
 
   public static createOne(payload: ICreateRolePayload): Promise<Role> {

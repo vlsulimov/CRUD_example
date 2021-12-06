@@ -2,22 +2,21 @@ import http from 'http';
 import express from 'express';
 import helmet from 'helmet';
 
-import { log } from '../../utilsGlobal/logger';
-import { BaseResponseError, ResponseFactory } from '../../utilsGlobal';
-import { IWebServerConfig } from '../../lib';
+import { IWebServerConfig, BaseResponseError, ResponseFactory, IWebServer } from '../../lib';
+
 import router from '../api/router';
 
 const webServerConfig: IWebServerConfig = {
   port: process.env.HTTP_PORT || 3001,
 };
 
-class WebServer {
+class WebServer implements IWebServer {
   private app: express.Application;
-  private httpServer: http.Server;
+  private _httpServer: http.Server;
 
   constructor() {
     this.app = express();
-    this.httpServer = http.createServer(this.app);
+    this._httpServer = http.createServer(this.app);
   }
 
   public initialize(): Promise<void> {
@@ -29,7 +28,7 @@ class WebServer {
         })
       );
       this.app.use(helmet());
-      this.app.use((req: express.Request, _res: express.Response) => log.routes(req.statusCode));
+      // this.app.use((req: express.Request, _res: express.Response) => log.routes(req.statusCode));
 
       this.app.use('/api', router);
 
@@ -40,12 +39,13 @@ class WebServer {
           res: express.Response,
           _next: express.NextFunction
         ) => {
+          console.log(err);
           res.status(err.statusCode);
           res.json(ResponseFactory.createServiceErrorResponse(err));
         }
       );
 
-      this.httpServer
+      this._httpServer
         .listen(webServerConfig.port)
         .on('listening', () => {
           resolve();
@@ -58,12 +58,12 @@ class WebServer {
 
   public close(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.httpServer.close((err?: Error) => (err ? reject(err) : resolve()));
+      this._httpServer.close((err?: Error) => (err ? reject(err) : resolve()));
     });
   }
 
-  public getHttpServer() {
-    return this.httpServer;
+  public get httpServer() {
+    return this._httpServer;
   }
 }
 

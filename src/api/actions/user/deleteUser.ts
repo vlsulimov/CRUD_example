@@ -1,31 +1,16 @@
 import express from 'express';
-import { getSchema } from 'fastest-validator-decorators';
 
-import { DeleteUserParams } from '../../../../types';
-import { IAction, IServiceResponse } from '../../../../lib';
-import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
+import { IAction, IdParam } from '../../../../lib';
 
-import { deleteOneUserById } from '../../methods/user.methods';
+import { deleteOneUserById } from '../../methods/user';
 
-export const deleteUser: IAction = {
+export const deleteUser: IAction<null> = {
   route: '/user/:id',
   method: 'DELETE',
-  validate: getSchema(DeleteUserParams),
-  controller: async (
-    req: express.Request<DeleteUserParams>,
-    res: express.Response<IServiceResponse<null>>,
-    next: express.NextFunction
-  ) => {
-    try {
-      const { id } = req.params;
-      await deleteOneUserById(id);
+  validate: IdParam.schema,
+  controller: async (req: express.Request<IdParam>) => {
+    await deleteOneUserById(req.params.id);
 
-      res.json(ResponseFactory.createServiceSuccessResponse());
-    } catch (err) {
-      if (err instanceof BaseResponseError) {
-        next(err);
-      }
-      next(new BaseResponseError(err.message));
-    }
+    return null;
   },
 };

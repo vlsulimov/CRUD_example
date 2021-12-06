@@ -1,31 +1,16 @@
 import express from 'express';
-import { getSchema } from 'fastest-validator-decorators';
 
-import { DeleteRoleParams } from '../../../../types';
-import { IAction, IServiceResponse } from '../../../../lib';
-import { BaseResponseError, ResponseFactory } from '../../../../utilsGlobal';
+import { IAction, IdParam } from '../../../../lib';
 
-import { deleteOneRoleById } from '../../methods/role.methods';
+import { deleteOneRoleById } from '../../methods/role';
 
-export const deleteRole: IAction = {
+export const deleteRole: IAction<null> = {
   route: '/role/:id',
   method: 'DELETE',
-  validate: getSchema(DeleteRoleParams),
-  controller: async (
-    req: express.Request<DeleteRoleParams>,
-    res: express.Response<IServiceResponse<null>>,
-    next: express.NextFunction
-  ) => {
-    try {
-      const { id } = req.params;
-      await deleteOneRoleById(id);
+  validate: IdParam.schema,
+  controller: async (req: express.Request<IdParam>) => {
+    await deleteOneRoleById(req.params.id);
 
-      res.json(ResponseFactory.createServiceSuccessResponse());
-    } catch (err) {
-      if (err instanceof BaseResponseError) {
-        next(err);
-      }
-      next(new BaseResponseError(err.message));
-    }
+    return null;
   },
 };

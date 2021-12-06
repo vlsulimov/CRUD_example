@@ -16,17 +16,8 @@
     "emitDecoratorMetadata": true,
     "preserveSymlinks": true,
     "pretty": true,
-    "types": [
-      "jest",
-      "node"
-    ]
+    "types": ["jest", "node"]
   },
-  "exclude": [
-    "node_modules",
-    "build"
-  ],
-  "include": [
-    "./src/**/*",
-    "./types/**/*",
-    "./lib/**/*"  ]
+  "exclude": ["node_modules", "build"],
+  "include": ["./src/**/*", "./types/**/*", "./test/**/*", "./lib/**/*"]
 }
