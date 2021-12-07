@@ -16,9 +16,16 @@ class Logger {
     return this.log(LogLevel.Debug, data);
   }
 
-  routes(httpCode: number | undefined) {
+  routes(): any {
     const { combine, timestamp, prettyPrint, json } = format;
     const winstonConfig = {
+      level(_req, res){
+        if (res.statusCode < 400){
+          return 'info';
+        }
+
+        return 'error';
+      },
       format: combine(timestamp(), prettyPrint(), json()),
       transports: [new transports.Console()],
       meta: true,
@@ -27,10 +34,6 @@ class Logger {
       colorize: true,
       ignoreRoute: () => false,
     };
-
-    if (httpCode && httpCode >= 400) {
-      return winston.errorLogger(winstonConfig);
-    }
 
     return winston.logger(winstonConfig);
   }

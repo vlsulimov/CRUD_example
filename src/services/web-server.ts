@@ -2,7 +2,7 @@ import http from 'http';
 import express from 'express';
 import helmet from 'helmet';
 
-import { IWebServerConfig, BaseResponseError, ResponseFactory, IWebServer } from '../../lib';
+import { IWebServerConfig, BaseResponseError, ResponseFactory, IWebServer, log } from '../../lib';
 
 import router from '../api/router';
 
@@ -28,7 +28,7 @@ class WebServer implements IWebServer {
         })
       );
       this.app.use(helmet());
-      // this.app.use((req: express.Request, _res: express.Response) => log.routes(req.statusCode));
+      this.app.use((req, res, next) => log.routes()(req, res, next));
 
       this.app.use('/api', router);
 
@@ -39,7 +39,6 @@ class WebServer implements IWebServer {
           res: express.Response,
           _next: express.NextFunction
         ) => {
-          console.log(err);
           res.status(err.statusCode);
           res.json(ResponseFactory.createServiceErrorResponse(err));
         }
