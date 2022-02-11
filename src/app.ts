@@ -8,7 +8,6 @@ import { webServer } from './services/web-server';
 async function startup() {
   try {
     await sequelize.authenticate();
-    await sequelize.sync();
 
     await webServer.initialize();
 
