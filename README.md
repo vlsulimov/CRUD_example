@@ -10,3 +10,7 @@
 8. GET /api/crud/role/:id - запросить информацию по конкретной роли
 9. POST /api/crud/role - добавить роль
 10. DELETE /api/crud/role - удалить роль
+
+
+## Comments
+`lib` folder should placed in another repository and installed as npm package
